@@ -94,37 +94,59 @@ background-color: lime;
 /* BEFORE MINING CODE */
 
 .tile[data-type="diamond"] {
-  background-color: #423535;
+  background-image: url('images/GRAVE_DIGGER_TILES_V2_GROUND_V1.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .tile[data-type="gold"] {
-  background-color: #403333;
+  background-image: url('images/GRAVE_DIGGER_TILES_V2_GROUND_V1.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .tile[data-type="silver"] {
-  background-color: #3c3030;
+  background-image: url('images/GRAVE_DIGGER_TILES_V2_GROUND_V1.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .tile[data-type="ore"] {
-  background-color: #3f3434;
+  background-image: url('images/GRAVE_DIGGER_TILES_V2_GROUND_V1.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .tile[data-type="stone"] {
-  background-color: #433a3a;
+  background-image: url('images/GRAVE_DIGGER_TILES_V2_GROUND_V1.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .tile[data-type="clay"] {
-  background-color: #4d4141;
+  background-image: url('images/GRAVE_DIGGER_TILES_V2_GROUND_V1.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .tile[data-type="bone"] {
-  background-color: #483e3e;
+  background-image: url('images/GRAVE_DIGGER_TILES_V2_GROUND_V1.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .tile[data-type="dirt"] {
   background-color: #4d4343;
-}
+} 
 
+/* BLACK BLOCKER TILES*/
 .tile[data-type="rock"] {
   background-color: #000000;
 }
