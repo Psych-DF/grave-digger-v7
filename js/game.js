@@ -51,8 +51,13 @@ function centerCameraOnPlayer() {
 
 let moveInterval = null;
 let heldDirection = null;
+let lastMoveTime = 0;
+const moveCooldown = 200; // in milliseconds
 
 function movePlayer(key) {
+  const now = Date.now();
+  if (now - lastMoveTime < moveCooldown) return; // 🚫 Still cooling down
+
   let newX = player.x;
   let newY = player.y;
 
@@ -73,13 +78,16 @@ function movePlayer(key) {
     case "d":
       newX++;
       break;
+    default:
+      return; // do nothing if non-movement key
   }
 
   const nextTile = getTile(newX, newY);
-  if (!nextTile || nextTile.dataset.type === "rock") return; // ⛔️ Block movement
+  if (!nextTile || nextTile.dataset.type === "rock") return;
 
   player.x = newX;
   player.y = newY;
+  lastMoveTime = now; // ✅ Reset cooldown
   updatePlayerPosition();
   centerCameraOnPlayer();
 }
