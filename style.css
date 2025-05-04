@@ -1,0 +1,225 @@
+/* Always put these at the top to normalize the page layout */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Your existing styles go below this */
+body {
+  background: #111;
+  color: #eee;
+  font-family: monospace;
+  text-align: center;
+}
+
+#game-wrapper {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  cursor: none;
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE and Edge */
+  position: relative;
+}
+
+#game-wrapper::-webkit-scrollbar {
+  display: none;                /* Chrome and Safari */
+}
+/* GRID */
+#game {
+  display: grid;
+  grid-template-columns: repeat(500, 24px);
+  grid-template-rows: repeat(500, 24px);
+  gap: 2px;
+  /* REMOVE these two lines 👇 */
+  /* margin: 0 auto;
+  margin-top: 20px; */
+  width: fit-content;
+}
+/* TILES */
+.tile {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  background: #444;
+  z-index: 0;
+}
+
+#game {
+  display: grid;
+  grid-template-columns: repeat(500, 24px);
+  grid-template-rows: repeat(500, 24px);
+  gap: 2px;
+  width: fit-content;
+}
+
+.player {
+  background: white;
+  outline: 1px solid white;
+  box-shadow: 0 0 2px 2px white;
+  z-index: 10; /* doesn't affect layout since you're not nesting */
+}
+
+.mined {
+  background: #222;
+  z-index: 10;
+}
+
+.mining {
+background-color: lime;
+  animation: pulse 0.1s infinite alternate;
+}
+
+@keyframes pulse {
+  from { filter: brightness(1); }
+  to   { filter: brightness(1.5); }
+}
+/* UI HUD */
+#hud {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  text-align: left;
+  color: #4dd;
+  font-family: monospace;
+}
+/* BEFORE MINING CODE */
+
+.tile[data-type="diamond"] {
+  background-color: #423535;
+}
+
+.tile[data-type="gold"] {
+  background-color: #403333;
+}
+
+.tile[data-type="silver"] {
+  background-color: #3c3030;
+}
+
+.tile[data-type="ore"] {
+  background-color: #3f3434;
+}
+
+.tile[data-type="stone"] {
+  background-color: #433a3a;
+}
+
+.tile[data-type="clay"] {
+  background-color: #4d4141;
+}
+
+.tile[data-type="bone"] {
+  background-color: #483e3e;
+}
+
+.tile[data-type="dirt"] {
+  background-color: #4d4343;
+}
+
+.tile[data-type="rock"] {
+  background-color: #000000;
+}
+
+/* AFTER MINING CODE */
+
+.tile.mined[data-type="diamond"] {
+  background-color: #d0ffff;
+  box-shadow: inset 0 0 0 1px black;
+  border-radius: 3px;
+}
+
+.tile.mined[data-type="gold"] {
+  background: linear-gradient(135deg, gold, orange);
+  box-shadow: inset 0 0 0 1px black;
+  border-radius: 3px;
+}
+
+.tile.mined[data-type="silver"] {
+  background: linear-gradient(135deg, f8fefe, f0f0f0);
+  box-shadow: inset 0 0 0 1px black;
+  border-radius: 3px;
+}
+
+.tile.mined[data-type="ore"] {
+  background-color: #ff870f;
+  box-shadow: inset 0 0 0 1px black;
+  border-radius: 3px;
+}
+
+.tile.mined[data-type="stone"] {
+  background-color: #cdbebe;
+  box-shadow: inset 0 0 0 1px black;
+  border-radius: 3px;
+}
+
+.tile.mined[data-type="clay"] {
+  background-color: #e3ab76;
+  box-shadow: inset 0 0 0 1px black;
+  border-radius: 3px;
+}
+
+.tile.mined[data-type="bone"] {
+  background-color: #faf6d8;
+  box-shadow: inset 0 0 0 1px black;
+  border-radius: 3px;
+}
+
+.tile.mined[data-type="dirt"] {
+  background-image: url('images/icons8-skull-24.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.tile.mined[data-type="rock"] {
+  background-color: #272121;
+  box-shadow: inset 0 0 0 1px black;
+  border-radius: 3px;
+}
+
+/* SCREEN SHADOW OUTLINE STYLING */
+
+#screen-shadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* ensures it doesn't block mouse input */
+  z-index: 1000;
+
+  background:
+    radial-gradient(circle at center, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 10) 100%),
+    linear-gradient(to top,    rgba(0, 0, 0, 10), transparent 20%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 10), transparent 20%),
+    linear-gradient(to left,   rgba(0, 0, 0, 10), transparent 20%),
+    linear-gradient(to right,  rgba(0, 0, 0, 10), transparent 20%);
+}
+
+
+/* START SCREEN STYLING */
+
+#start-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #111;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  align-items: center;     /* horizontal center */
+  font-family: monospace;
+  z-index: 2000; /* ensure it's above the game */
+}
