@@ -143,7 +143,10 @@ background-color: lime;
 }
 
 .tile[data-type="dirt"] {
-  background-color: #4d4343;
+  background-image: url('images/GRAVE_DIGGER_TILES_V2_GROUND_V1.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 } 
 
 /* BLACK BLOCKER TILES*/
