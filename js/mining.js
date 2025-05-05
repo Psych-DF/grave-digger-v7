@@ -34,6 +34,10 @@ export function mineTile(x, y) {
       tile.classList.remove(type);
       tile.classList.add("mined");
 
+      player.digsToday++;
+      player.collectedToday[type] = (player.collectedToday[type] || 0) + 1;
+
+
       // ✅ Dynamically update player stat and HUD based on tile type
       if (player.hasOwnProperty(type)) {
         player[type] += reward;
