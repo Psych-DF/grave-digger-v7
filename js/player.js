@@ -6,6 +6,7 @@ export const player = {
   spawnY: 250,
   maxSteps: 50,
   stepsLeft: 50,
+  digsToday: 0,
   diamond: 0,
   gold: 0,
   silver: 0,
