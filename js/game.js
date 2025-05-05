@@ -56,40 +56,40 @@ const moveCooldown = 200; // in milliseconds
 
 function movePlayer(key) {
   const now = Date.now();
-  if (now - lastMoveTime < moveCooldown) return; // 🚫 Still cooling down
+  if (now - lastMoveTime < moveCooldown) return;
+  if (player.stepsLeft <= 0) return;
 
   let newX = player.x;
   let newY = player.y;
-  player.stepsLeft--; // 👣 Simple step reduction
-  updateStepDisplay();
 
   switch (key) {
-    case "arrowup":
-    case "w":
-      newY--;
-      break;
-    case "arrowdown":
-    case "s":
-      newY++;
-      break;
-    case "arrowleft":
-    case "a":
-      newX--;
-      break;
-    case "arrowright":
-    case "d":
-      newX++;
-      break;
-    default:
-      return; // do nothing if non-movement key
+    case "arrowup": case "w": newY--; break;
+    case "arrowdown": case "s": newY++; break;
+    case "arrowleft": case "a": newX--; break;
+    case "arrowright": case "d": newX++; break;
+    default: return;
   }
 
   const nextTile = getTile(newX, newY);
-  if (!nextTile || nextTile.dataset.type === "rock") return;
+  if (!nextTile || nextTile.dataset.type === "rock") return; // Block invalid move
 
+  // ✅ Valid move: now spend the step
   player.x = newX;
   player.y = newY;
-  lastMoveTime = now; // ✅ Reset cooldown
+  player.stepsLeft--;
+  updateStepDisplay();
+
+  // ✅ If steps depleted, reset position and steps
+  if (player.stepsLeft <= 0) {
+    player.stepsLeft = player.maxSteps;
+    player.x = player.spawnX;
+    player.y = player.spawnY;
+    updatePlayerPosition();
+    centerCameraOnPlayer();
+    return;
+  }
+
+  lastMoveTime = now;
   updatePlayerPosition();
   centerCameraOnPlayer();
 }
