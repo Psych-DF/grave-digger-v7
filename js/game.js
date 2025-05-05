@@ -60,6 +60,8 @@ function movePlayer(key) {
 
   let newX = player.x;
   let newY = player.y;
+  player.stepsLeft--; // 👣 Simple step reduction
+  updateStepDisplay();
 
   switch (key) {
     case "arrowup":
@@ -132,6 +134,11 @@ function handleKeyUp(e) {
     clearTimeout(mineTimeout);
     mineTimeout = null;
   }
+
+export function updateStepDisplay() {
+  const el = document.getElementById("step-count");
+  if (el) el.textContent = player.stepsLeft;
+}
 
 }
 
