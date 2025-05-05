@@ -134,11 +134,11 @@ function handleKeyUp(e) {
     clearTimeout(mineTimeout);
     mineTimeout = null;
   }
+}
 
+// ✅ Exported globally — outside all functions
 export function updateStepDisplay() {
   const el = document.getElementById("step-count");
   if (el) el.textContent = player.stepsLeft;
-}
-
 }
 
