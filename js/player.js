@@ -2,6 +2,8 @@
 export const player = {
   x: 250, // middle of 150
   y: 250,
+  spawnX: 250,
+  spawnY: 250,
   maxSteps: 150,
   stepsLeft: 150,
   diamond: 0,
